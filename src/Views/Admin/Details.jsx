@@ -114,7 +114,7 @@ const Details = () => {
                       स.नं.
                     </th> */}
                     <th scope='col' class='px-6 py-3'>
-                      समानको नाम (परिमाण)
+                      समानको नाम (स्पेसिफिकेसन) (परिमाण)
                     </th>
 
                     <th scope='col' class='px-6 py-3'>
@@ -126,9 +126,7 @@ const Details = () => {
                     <th scope='col' class='px-6 py-3'>
                       आर्थिक वर्ष
                     </th>
-                    <th scope='col' class='px-6 py-3'>
-                      कार्यालयको नाम
-                    </th>
+
                     <th scope='col' class='px-6 py-3'>
                       <span class='sr-only'>Edit</span>
                     </th>
@@ -151,7 +149,8 @@ const Details = () => {
                           {detail.attributes.goods.map((good) => {
                             return (
                               <span class='inline-block bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900'>
-                                {good.goodname} {``} ({good.quantity})
+                                {good.goodname} {``} ({good.specification}) {``}{' '}
+                                ({good.quantity})
                               </span>
                             );
                           })}
@@ -164,9 +163,7 @@ const Details = () => {
                         <td class='px-6 py-4'>
                           {detail.attributes.fiscalyear}{' '}
                         </td>
-                        <td class='px-6 py-4'>
-                          {detail.attributes.companyname}{' '}
-                        </td>
+
                         <td class='flex px-4 py-4'>
                           <a
                             onClick={() => {

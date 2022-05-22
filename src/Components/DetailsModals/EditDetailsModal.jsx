@@ -22,7 +22,6 @@ const EditDetailsModal = ({
     goods: attributes.goods,
     date: attributes.date,
     fiscalyear: attributes.fiscalyear,
-    companyname: attributes.companyname,
     customername: attributes.customername,
   };
 
@@ -37,6 +36,8 @@ const EditDetailsModal = ({
     const values = [...inputFields];
     if (event.target.name === 'goodname') {
       values[index].goodname = event.target.value;
+    } else if (event.target.name === 'specification') {
+      values[index].specification = event.target.value;
     } else {
       values[index].quantity = event.target.value;
     }
@@ -47,7 +48,7 @@ const EditDetailsModal = ({
 
   const handleAddFields = () => {
     const values = [...inputFields];
-    values.push({ goodname: null, quantity: null });
+    values.push({ goodname: '', specification: '', quantity: '' });
     setInputFields(values);
     setdata({ ...data, goods: values });
   };
@@ -101,6 +102,10 @@ const EditDetailsModal = ({
       progress: undefined,
     });
   };
+
+  useEffect(() => {
+    console.log('attributes', attributes);
+  }, [attributes]);
 
   return (
     <div class=' bg-rgba overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full '>
@@ -207,6 +212,15 @@ const EditDetailsModal = ({
                         type='text'
                         class='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                         required
+                        name='specification'
+                        value={inputField.specification}
+                        placeholder='स्पेसिफिकेसन'
+                        onChange={(event) => handleInputChange(index, event)}
+                      />
+                      <input
+                        type='text'
+                        class='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                        required
                         name='quantity'
                         value={inputField.quantity}
                         placeholder='परिमाण'
@@ -235,7 +249,7 @@ const EditDetailsModal = ({
                 })}
               </div>
               <div className='flex flex-wrap md:flex-row flex-col'>
-                <div class='mb-6 grow'>
+                <div class='mb-6 grow md:mr-5'>
                   <label
                     for='email'
                     class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
@@ -295,34 +309,13 @@ const EditDetailsModal = ({
                   <input
                     type='text'
                     id='text'
-                    class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                    class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     placeholder='2078/2079'
                     value={data.fiscalyear}
                     onChange={(e) =>
                       setdata({
                         ...data,
                         fiscalyear: e.target.value,
-                      })
-                    }
-                    required
-                  />
-                </div>
-                <div class='mb-6 grow'>
-                  <label
-                    for='text'
-                    class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                  >
-                    कार्यालयको नाम
-                  </label>
-                  <input
-                    type='text'
-                    id='text'
-                    class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                    value={data.companyname}
-                    onChange={(e) =>
-                      setdata({
-                        ...data,
-                        companyname: e.target.value,
                       })
                     }
                     required

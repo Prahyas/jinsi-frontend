@@ -10,14 +10,13 @@ const Dashboard = ({ id, details }) => {
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
   const [inputFields, setInputFields] = useState([
-    { goodname: '', quantity: '' },
+    { goodname: '', specification: '', quantity: '' },
   ]);
   const initialFormState = {
     department: '',
     goods: [],
     date: '',
     fiscalyear: '',
-    companyname: '',
     customername: '',
   };
 
@@ -29,6 +28,8 @@ const Dashboard = ({ id, details }) => {
     const values = [...inputFields];
     if (event.target.name === 'goodname') {
       values[index].goodname = event.target.value;
+    } else if (event.target.name === 'specification') {
+      values[index].specification = event.target.value;
     } else {
       values[index].quantity = event.target.value;
     }
@@ -39,7 +40,7 @@ const Dashboard = ({ id, details }) => {
 
   const handleAddFields = () => {
     const values = [...inputFields];
-    values.push({ goodname: null, quantity: null });
+    values.push({ goodname: '', specification: '', quantity: '' });
     setInputFields(values);
     setdata({ ...data, goods: values });
   };
@@ -92,6 +93,10 @@ const Dashboard = ({ id, details }) => {
       progress: undefined,
     });
   };
+
+  useEffect(() => {
+    console.log('data', data);
+  }, [data]);
 
   return (
     <>
@@ -175,6 +180,15 @@ const Dashboard = ({ id, details }) => {
                   type='text'
                   class='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   required
+                  name='specification'
+                  value={inputField.specification}
+                  placeholder='स्पेसिफिकेसन'
+                  onChange={(event) => handleInputChange(index, event)}
+                />
+                <input
+                  type='text'
+                  class='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                  required
                   name='quantity'
                   value={inputField.quantity}
                   placeholder='परिमाण'
@@ -203,7 +217,7 @@ const Dashboard = ({ id, details }) => {
           })}
         </div>
         <div className='flex flex-wrap md:flex-row flex-col'>
-          <div class='mb-6 grow'>
+          <div class='mb-6 grow md:mr-5'>
             <label
               for='email'
               class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
@@ -262,7 +276,7 @@ const Dashboard = ({ id, details }) => {
             <input
               type='text'
               id='text'
-              class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+              class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               placeholder='2078/2079'
               value={data.fiscalyear}
               onChange={(e) =>
@@ -275,7 +289,7 @@ const Dashboard = ({ id, details }) => {
             />
           </div>
           <div class='mb-6 grow'>
-            <label
+            {/* <label
               for='text'
               class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
             >
@@ -293,7 +307,7 @@ const Dashboard = ({ id, details }) => {
                 })
               }
               required
-            />
+            /> */}
           </div>
         </div>
 
