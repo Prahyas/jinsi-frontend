@@ -28,7 +28,8 @@ const Settings = () => {
         setInterval(() => {
           setAddModal(false);
           // setDepartments([...departments, response.data.data]);
-          fetchDepartments();
+          // fetchDepartments();
+          window.location.reload();
         }, 1500);
       })
       .catch((error) => {
@@ -58,7 +59,8 @@ const Settings = () => {
         setInterval(() => {
           setEditModal(false);
           // setDepartments([response.data.data]);
-          fetchDepartments();
+          // fetchDepartments();
+          window.location.reload();
         }, 1500);
       })
       .catch((error) => {
