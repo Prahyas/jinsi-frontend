@@ -18,6 +18,7 @@ const Dashboard = ({ id, details }) => {
     date: '',
     fiscalyear: '',
     customername: '',
+    departmentid: '',
   };
 
   const [data, setdata] = useState(initialFormState);
@@ -118,6 +119,7 @@ const Dashboard = ({ id, details }) => {
               setdata({
                 ...data,
                 department: e.target.value,
+                departmentid: parseInt(e.target.value),
               })
             }
             class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
@@ -132,6 +134,7 @@ const Dashboard = ({ id, details }) => {
             ))}
           </select>
         </div>
+
         <hr className='mb-5' />
         <div class='mb-6'>
           <div className='flex justify-between items-center mb-2'>
@@ -288,29 +291,7 @@ const Dashboard = ({ id, details }) => {
               required
             />
           </div>
-          <div class='mb-6 grow'>
-            {/* <label
-              for='text'
-              class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-            >
-              कार्यालयको नाम
-            </label>
-            <input
-              type='text'
-              id='text'
-              class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-              value={data.companyname}
-              onChange={(e) =>
-                setdata({
-                  ...data,
-                  companyname: e.target.value,
-                })
-              }
-              required
-            /> */}
-          </div>
         </div>
-
         <button
           type='button'
           onClick={onSubmit}

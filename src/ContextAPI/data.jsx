@@ -5,7 +5,7 @@ export const DataContext = createContext();
 
 export const DataProvider = (props) => {
   const [parameter, setParameter] = useState('');
-  // const [api, setapi] = useState('https://jinsibackend.herokuapp.com');
+  // const [api, setapi] = useState('http://localhost:1337');
   const [api, setapi] = useState('https://jinsibackend.herokuapp.com');
   const [departments, setDepartments] = useState([]);
   const [filteredDepartments, setfilteredDepartments] = useState([]);
