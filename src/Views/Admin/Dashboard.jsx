@@ -95,10 +95,6 @@ const Dashboard = ({ id, details }) => {
     });
   };
 
-  useEffect(() => {
-    console.log('data', data);
-  }, [data]);
-
   return (
     <>
       <div className='mb-2'>
@@ -106,10 +102,10 @@ const Dashboard = ({ id, details }) => {
       </div>
       <hr className='mb-5' />
       <form>
-        <div class='mb-6'>
+        <div className='mb-6'>
           <label
-            for='countries'
-            class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400'
+            htmlFor='countries'
+            className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400'
           >
             शाखा छान्नुहोस्
           </label>
@@ -122,13 +118,13 @@ const Dashboard = ({ id, details }) => {
                 departmentid: parseInt(e.target.value),
               })
             }
-            class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
           >
-            <option value='' selected disabled>
+            <option value='' defaultValue disabled>
               Select one...
             </option>
             {departments.map((department) => (
-              <option value={department.id}>
+              <option key={department.id} value={department.id}>
                 {department.attributes.name}
               </option>
             ))}
@@ -136,29 +132,29 @@ const Dashboard = ({ id, details }) => {
         </div>
 
         <hr className='mb-5' />
-        <div class='mb-6'>
+        <div className='mb-6'>
           <div className='flex justify-between items-center mb-2'>
             <label
-              for='text'
-              class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+              htmlFor='text'
+              className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
             >
               समानको सुची
             </label>
             <button
               type='button'
               onClick={() => handleAddFields()}
-              class='flex justify-center items-center py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
+              className='flex justify-center items-center py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                class='h-5 w-5 mr-2'
+                className='h-5 w-5 mr-2'
                 viewBox='0 0 20 20'
                 fill='currentColor'
               >
                 <path
-                  fill-rule='evenodd'
+                  fillRule='evenodd'
                   d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z'
-                  clip-rule='evenodd'
+                  clipRule='evenodd'
                 />
               </svg>
               <span>नया</span>
@@ -172,7 +168,7 @@ const Dashboard = ({ id, details }) => {
               >
                 <input
                   type='text'
-                  class='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                  className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   required
                   name='goodname'
                   value={inputField.goodname}
@@ -181,7 +177,7 @@ const Dashboard = ({ id, details }) => {
                 />
                 <input
                   type='text'
-                  class='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                  className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   required
                   name='specification'
                   value={inputField.specification}
@@ -190,7 +186,7 @@ const Dashboard = ({ id, details }) => {
                 />
                 <input
                   type='text'
-                  class='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                  className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   required
                   name='quantity'
                   value={inputField.quantity}
@@ -199,19 +195,19 @@ const Dashboard = ({ id, details }) => {
                 />
                 <button
                   type='button'
-                  class='py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
+                  className='py-2 px-3 text-xs font-medium text-center text-white bg-red-500 rounded-lg'
                   onClick={() => handleRemoveFields(index)}
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
-                    class='h-5 w-5'
+                    className='h-5 w-5'
                     viewBox='0 0 20 20'
                     fill='currentColor'
                   >
                     <path
-                      fill-rule='evenodd'
+                      fillRule='evenodd'
                       d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z'
-                      clip-rule='evenodd'
+                      clipRule='evenodd'
                     />
                   </svg>
                 </button>
@@ -220,10 +216,10 @@ const Dashboard = ({ id, details }) => {
           })}
         </div>
         <div className='flex flex-wrap md:flex-row flex-col'>
-          <div class='mb-6 grow md:mr-5'>
+          <div className='mb-6 grow md:mr-5'>
             <label
-              for='email'
-              class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+              htmlFor='email'
+              className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
             >
               बुझेको मिति
             </label>
@@ -234,7 +230,7 @@ const Dashboard = ({ id, details }) => {
             /> */}
             <input
               type='text'
-              class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               placeholder='yyyy/mm/dd'
               value={data.date}
               onChange={(e) =>
@@ -246,17 +242,17 @@ const Dashboard = ({ id, details }) => {
               required
             />
           </div>
-          <div class='mb-6  grow'>
+          <div className='mb-6  grow'>
             <label
-              for='text'
-              class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+              htmlFor='text'
+              className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
             >
               बुझी लिनेको नाम
             </label>
             <input
               type='text'
               id='text'
-              class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               value={data.customername}
               onChange={(e) =>
                 setdata({
@@ -269,17 +265,17 @@ const Dashboard = ({ id, details }) => {
           </div>
         </div>
         <div className='flex flex-wrap md:flex-row flex-col'>
-          <div class='mb-6 md:mr-6 grow'>
+          <div className='mb-6 md:mr-6 grow'>
             <label
-              for='email'
-              class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+              htmlFor='email'
+              className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
             >
               आर्थिक वर्ष
             </label>
             <input
               type='text'
               id='text'
-              class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
               placeholder='2078/2079'
               value={data.fiscalyear}
               onChange={(e) =>
@@ -295,7 +291,7 @@ const Dashboard = ({ id, details }) => {
         <button
           type='button'
           onClick={onSubmit}
-          class='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+          className='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
           disabled={!data.department}
         >
           Submit

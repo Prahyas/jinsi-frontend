@@ -19,10 +19,6 @@ const AddDepartmentModal = ({ addModal, setAddModal, addDepartments }) => {
     setnewDepartmentData(initialFormState);
   };
 
-  useEffect(() => {
-    console.log('newdata', newDepartmentData);
-  }, [newDepartmentData]);
-
   return (
     <>
       <div class=' bg-rgba overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full '>

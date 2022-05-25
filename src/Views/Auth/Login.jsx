@@ -20,7 +20,7 @@ const Login = () => {
   const errorNotification = (error) => {
     toast.error(`${error}`, {
       position: 'top-right',
-      autoClose: 5000,
+      autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -40,8 +40,8 @@ const Login = () => {
       setcurrentUser(response.data);
       navigate('/admin/dashboard');
     } catch (error) {
-      console.log(error.response.data.error.message);
-      errorNotification(error.response.data.error.message);
+      // console.log(error.response.data.error.message);
+      // errorNotification(error.response.data.error.message);
     }
   };
 

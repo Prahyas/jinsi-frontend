@@ -67,8 +67,15 @@ const Settings = () => {
   };
 
   const deleteDepartment = async (deleteDepartmentId) => {
-    await axios.delete(`${api}/api/departments/${deleteDepartmentId}`);
-    fetchDepartments();
+    const response = await axios.delete(
+      `${api}/api/departments/${deleteDepartmentId}`
+    );
+    if (response) {
+      deleteNotification();
+      setInterval(() => {
+        window.location.reload();
+      }, 1500);
+    }
   };
 
   const successNotification = () =>
@@ -82,9 +89,9 @@ const Settings = () => {
       progress: undefined,
     });
   const deleteNotification = () =>
-    toast.success('Sorry you cannot delete department right now.', {
+    toast.success('Successfully delete.', {
       position: 'top-right',
-      autoClose: 3000,
+      autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -209,8 +216,7 @@ const Settings = () => {
                       ) : null}
                       <a
                         onClick={() => {
-                          deleteNotification();
-                          deleteDepartment();
+                          deleteDepartment(department.id);
                         }}
                         class='font-medium text-red-600 dark:text-blue-500 hover:underline'
                       >
