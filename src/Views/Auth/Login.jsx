@@ -40,8 +40,8 @@ const Login = () => {
       setcurrentUser(response.data);
       navigate('/admin/dashboard');
     } catch (error) {
-      // console.log(error.response.data.error.message);
-      // errorNotification(error.response.data.error.message);
+      console.log(error.response.data.error.message);
+      errorNotification(error.response.data.error.message);
     }
   };
 
