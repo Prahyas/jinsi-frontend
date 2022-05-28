@@ -11,7 +11,7 @@ export const DataProvider = (props) => {
   const [departments, setDepartments] = useState([]);
   const [filteredDepartments, setfilteredDepartments] = useState([]);
   const [details, setDetails] = useState([]);
-  const [currentUser, setcurrentUser] = useState();
+  const [currentUser, setcurrentUser] = useState(null);
 
   useEffect(() => {
     const getLocal = () => {

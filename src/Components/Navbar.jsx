@@ -11,19 +11,17 @@ const Navbar = ({ showNav, setshowNav }) => {
 
   const Logout = (e) => {
     e.preventDefault();
-    setcurrentUser({});
+    setcurrentUser(null);
     navigate('/auth/login');
   };
-
-  useEffect(() => {
-    console.log('current user', currentUser);
-  }, [currentUser]);
 
   return (
     <>
       <nav className='flex justify-between px-5 items-center fixed lg:ml-[20%] h-[60px] border-b-2 bg-gray-200 shadow w-[100%] lg:w-[80%]'>
         <div>
-          <p className='hidden lg:block text-base dark:text-white'>Welcome!</p>
+          <p className='hidden lg:block text-base dark:text-white'>
+            वेनीघाट रोराङ गाउँपालिका{' '}
+          </p>
           <button onClick={() => setshowNav(!showNav)} className='lg:hidden'>
             <svg
               xmlns='http://www.w3.org/2000/svg'

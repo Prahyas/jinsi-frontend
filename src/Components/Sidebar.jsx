@@ -49,7 +49,7 @@ const Sidebar = ({ showNav, setshowNav }) => {
       <div
         className={`${
           showNav ? 'block' : 'hidden'
-        } lg:block w-[100%] lg:w-[20%] mt-[7vh] lg:mt-0 h-full fixed overflow-y-auto py-4 px-3 bg-gray-200 dark:bg-gray-800`}
+        } lg:block w-[100%] lg:w-[20%] mt-[8vh] lg:mt-0 h-full fixed overflow-y-auto py-4 px-3 bg-gray-200 dark:bg-gray-800`}
       >
         <div className='hidden lg:flex justify-center mb-5'>
           <img src={nepalsarkarlogo} height={100} width={100} alt='' />
@@ -153,7 +153,7 @@ const Sidebar = ({ showNav, setshowNav }) => {
                 className='flex-1 ml-3 text-left whitespace-nowrap'
                 sidebar-toggle-item=''
               >
-                ओडा कार्यालय
+                वडा कार्यालय
               </span>
               <svg
                 sidebar-toggle-item=''

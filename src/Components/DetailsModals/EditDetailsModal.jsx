@@ -6,6 +6,8 @@ import { DataContext } from '../../ContextAPI/data';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
+import 'nepali-datepicker-reactjs/dist/index.css';
 
 const EditDetailsModal = ({
   editModal,
@@ -18,11 +20,12 @@ const EditDetailsModal = ({
   const [api, setapi] = apiData;
   const [inputFields, setInputFields] = useState([...attributes.goods]);
   const initialFormState = {
-    department: null,
+    department: attributes.departmentid,
     goods: attributes.goods,
     date: attributes.date,
     fiscalyear: attributes.fiscalyear,
     customername: attributes.customername,
+    departmentid: attributes.departmentid,
   };
 
   const [data, setdata] = useState(initialFormState);
@@ -106,9 +109,12 @@ const EditDetailsModal = ({
   useEffect(() => {
     console.log('attributes', attributes);
   }, [attributes]);
+  useEffect(() => {
+    console.log('data2', data);
+  }, [data]);
 
   return (
-    <div class=' bg-rgba overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 flex justify-center items-center h-full '>
+    <div class=' bg-rgba overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 bottom-0 z-50 flex justify-center items-center h-full '>
       <div class='relative px-4 w-full max-w-2xl h-full pt-10'>
         <div class='relative bg-white rounded-lg shadow dark:bg-gray-700'>
           <div class='flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600'>
@@ -150,22 +156,102 @@ const EditDetailsModal = ({
                     setdata({
                       ...data,
                       department: e.target.value,
+                      departmentid: parseInt(e.target.value),
                     })
                   }
                   class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                  value={data.department}
                 >
                   <option value='' selected disabled>
                     Select one...
                   </option>
                   {departments.map((department) => (
-                    <option value={department.id}>
+                    <option key={department.id} value={department.id}>
                       {department.attributes.name}
                     </option>
                   ))}
                 </select>
               </div>
               <hr className='mb-5' />
-              <div class='mb-6'>
+              <div className='flex flex-wrap mb-6 md:flex-row flex-col'>
+                <div className='w-full   md:mr-5'>
+                  <label
+                    htmlFor='email'
+                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    बुझेको मिति
+                  </label>
+                  <NepaliDatePicker
+                    inputClassName='form-control'
+                    className='block mb-6 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    value={data.date}
+                    onChange={(value) => setdata({ ...data, date: value })}
+                    options={{ calenderLocale: 'ne', valueLocale: 'en' }}
+                  />
+                  {/* <Calendar
+              onChange={(value) => setdata({ ...data, date: value.bsDate })}
+              className='rounded'
+              type='date'
+            /> */}
+                  {/* <input
+              type='text'
+              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+              placeholder='yyyy/mm/dd'
+              value={data.date}
+              onChange={(e) =>
+                setdata({
+                  ...data,
+                  date: e.target.value,
+                })
+              }
+              required
+            /> */}
+                </div>
+                <div className='w-full md:w-[30%] mb-6 md:mr-6 '>
+                  <label
+                    htmlFor='text'
+                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    बुझी लिनेको नाम
+                  </label>
+                  <input
+                    type='text'
+                    id='text'
+                    className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                    value={data.customername}
+                    onChange={(e) =>
+                      setdata({
+                        ...data,
+                        customername: e.target.value,
+                      })
+                    }
+                    required
+                  />
+                </div>
+                <div className='w-full md:w-[30%]'>
+                  <label
+                    htmlFor='email'
+                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    आर्थिक वर्ष
+                  </label>
+                  <input
+                    type='text'
+                    id='text'
+                    className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                    placeholder='2078/2079'
+                    value={data.fiscalyear}
+                    onChange={(e) =>
+                      setdata({
+                        ...data,
+                        fiscalyear: e.target.value,
+                      })
+                    }
+                    required
+                  />
+                </div>
+              </div>
+              <div class='mb-6 border-2 p-4'>
                 <div className='flex justify-between items-center mb-2'>
                   <label
                     for='text'
@@ -248,80 +334,6 @@ const EditDetailsModal = ({
                   );
                 })}
               </div>
-              <div className='flex flex-wrap md:flex-row flex-col'>
-                <div class='mb-6 grow md:mr-5'>
-                  <label
-                    for='email'
-                    class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                  >
-                    बुझेको मिति
-                  </label>
-                  {/* <Calendar
-                    onChange={(value) =>
-                      setdata({ ...data, date: value.bsDate })
-                    }
-                    className='rounded'
-                    required
-                  /> */}
-                  <input
-                    class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                    placeholder='yyyy/mm/dd'
-                    value={data.date}
-                    onChange={(e) =>
-                      setdata({
-                        ...data,
-                        date: e.target.value,
-                      })
-                    }
-                    required
-                  />
-                </div>
-                <div class='mb-6  grow'>
-                  <label
-                    for='text'
-                    class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                  >
-                    बुझी लिनेको नाम
-                  </label>
-                  <input
-                    type='text'
-                    id='text'
-                    class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                    value={data.customername}
-                    onChange={(e) =>
-                      setdata({
-                        ...data,
-                        customername: e.target.value,
-                      })
-                    }
-                    required
-                  />
-                </div>
-              </div>
-              <div className='flex flex-wrap md:flex-row flex-col'>
-                <div class='mb-6 md:mr-6 grow'>
-                  <label
-                    for='email'
-                    class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                  >
-                    आर्थिक वर्ष
-                  </label>
-                  <input
-                    type='text'
-                    id='text'
-                    class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                    placeholder='2078/2079'
-                    value={data.fiscalyear}
-                    onChange={(e) =>
-                      setdata({
-                        ...data,
-                        fiscalyear: e.target.value,
-                      })
-                    }
-                    required
-                  />
-                </div>
-              </div>
 
               <button
                 type='button'
@@ -331,7 +343,7 @@ const EditDetailsModal = ({
                 class='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
                 disabled={!data.department}
               >
-                Submit
+                पेश गर्नुहोस्
               </button>
               <ToastContainer />
             </form>

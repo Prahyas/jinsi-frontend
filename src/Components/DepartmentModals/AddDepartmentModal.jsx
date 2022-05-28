@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 const AddDepartmentModal = ({ addModal, setAddModal, addDepartments }) => {
   const initialFormState = {
-    name: '',
-    type: '',
-    description: '',
+    name: null,
+    type: null,
+    description: null,
   };
   const [newDepartmentData, setnewDepartmentData] = useState(initialFormState);
 
@@ -18,6 +18,10 @@ const AddDepartmentModal = ({ addModal, setAddModal, addDepartments }) => {
     addDepartments(newDepartmentData);
     setnewDepartmentData(initialFormState);
   };
+
+  useEffect(() => {
+    console.log(newDepartmentData);
+  }, [newDepartmentData]);
 
   return (
     <>

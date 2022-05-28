@@ -18,7 +18,8 @@ const Login = () => {
   const [currentUser, setcurrentUser] = currentUserData;
 
   const errorNotification = (error) => {
-    toast.error(`${error}`, {
+    // toast.error(`${error}`, {
+    toast.error(`इमेल वा पास्स्वोर्ड मिलेन`, {
       position: 'top-right',
       autoClose: 1500,
       hideProgressBar: false,
@@ -28,10 +29,6 @@ const Login = () => {
       progress: undefined,
     });
   };
-
-  useEffect(() => {
-    console.log('current User', currentUser);
-  }, [currentUser]);
 
   const Login = async (e) => {
     try {
@@ -50,7 +47,7 @@ const Login = () => {
       <div className='bg-gray-200 flex justify-center items-center h-screen p-3'>
         <form className='w-full sm:w-2/5 bg-white p-6 rounded-md shadow-xl'>
           <div className='mb-6'>
-            <span className='font-bold text-2xl'> Login </span>
+            <span className='font-bold text-2xl'> लग्-इन् </span>
           </div>
           <div className='mb-6'>
             <label
@@ -124,9 +121,9 @@ const Login = () => {
           >
             लग्-इन् गर्नुहोस्
           </button>
-          <Link to='/auth/register' className='text-sm underline text-red-400'>
+          {/* <Link to='/auth/register' className='text-sm underline text-red-400'>
             नया खाता खोल्नुहोस्
-          </Link>
+          </Link> */}
         </form>
         <ToastContainer />
       </div>
