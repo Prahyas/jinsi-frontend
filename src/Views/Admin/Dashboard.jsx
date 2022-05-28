@@ -150,7 +150,7 @@ const Dashboard = ({ id, details }) => {
             </label>
             <NepaliDatePicker
               inputClassName='form-control'
-              className='static block mb-6 text-sm font-medium text-gray-900 dark:text-gray-300'
+              className=' mb-6'
               value={data.date}
               onChange={(value) => setdata({ ...data, date: value })}
               options={{ calenderLocale: 'ne', valueLocale: 'en' }}
