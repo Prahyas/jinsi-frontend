@@ -3,7 +3,7 @@ import { DataContext } from '../../ContextAPI/data';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { NepaliDatePicker } from 'Nepali-Datepicker-Reactjs';
+import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
 
 const Dashboard = ({ id, details }) => {
