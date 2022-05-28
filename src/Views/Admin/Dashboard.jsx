@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Calendar from '@sbmdkl/nepali-datepicker-reactjs';
-import '@sbmdkl/nepali-datepicker-reactjs/dist/index.css';
 import { DataContext } from '../../ContextAPI/data';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';

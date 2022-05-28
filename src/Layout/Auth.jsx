@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import NotFound from '../Components/NotFound';
 import Login from '../Views/Auth/Login';
 import Register from '../Views/Auth/Register';
 

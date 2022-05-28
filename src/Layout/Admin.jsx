@@ -5,7 +5,6 @@ import Sidebar from '../Components/Sidebar';
 import Dashboard from '../Views/Admin/Dashboard';
 import Details from '../Views/Admin/Details';
 import Settings from '../Views/Admin/Settings';
-import Login from '../Views/Auth/Login';
 import { DataContext } from '../ContextAPI/data';
 import NotFound from '../Components/NotFound';
 
@@ -13,7 +12,6 @@ const Admin = () => {
   const [showNav, setshowNav] = useState(false);
   const { currentUserData } = useContext(DataContext);
   const [currentUser, setcurrentUser] = currentUserData;
-  const [islogedin, setislogedin] = useState(true);
 
   useEffect(() => {
     console.log('admin bata', currentUser);

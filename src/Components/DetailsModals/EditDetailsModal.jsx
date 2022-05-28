@@ -1,7 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Dashboard from '../../Views/Admin/Dashboard';
-import Calendar from '@sbmdkl/nepali-datepicker-reactjs';
-import '@sbmdkl/nepali-datepicker-reactjs/dist/index.css';
 import { DataContext } from '../../ContextAPI/data';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -183,11 +180,12 @@ const EditDetailsModal = ({
                   </label>
                   <NepaliDatePicker
                     inputClassName='form-control'
-                    className='block mb-6 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='mb-6'
                     value={data.date}
                     onChange={(value) => setdata({ ...data, date: value })}
                     options={{ calenderLocale: 'ne', valueLocale: 'en' }}
                   />
+
                   {/* <Calendar
               onChange={(value) => setdata({ ...data, date: value.bsDate })}
               className='rounded'

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import nepalsarkarlogo from '../Assets/nepalsarkarlogo.png';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../ContextAPI/data';
 
 const Navbar = ({ showNav, setshowNav }) => {
