@@ -339,7 +339,7 @@ const EditDetailsModal = ({
                   onSubmit(detailId);
                 }}
                 class='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-                disabled={!data.department}
+                disabled={!data.department || data.date === ''}
               >
                 पेश गर्नुहोस्
               </button>

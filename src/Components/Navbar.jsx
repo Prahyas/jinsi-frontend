@@ -17,7 +17,7 @@ const Navbar = ({ showNav, setshowNav }) => {
 
   return (
     <>
-      <nav className='flex justify-between px-5 items-center fixed lg:ml-[20%] h-[60px] border-b-2 bg-gray-200 shadow w-[100%] lg:w-[80%]'>
+      <nav className='flex z-[10] justify-between px-5 items-center fixed lg:ml-[20%] h-[60px] border-b-2 bg-gray-200 shadow w-[100%] lg:w-[80%]'>
         <div>
           <p className='hidden lg:block text-base dark:text-white'>
             वेनीघाट रोराङ गाउँपालिका{' '}

@@ -4,6 +4,7 @@ import EditDetailsModal from '../../Components/DetailsModals/EditDetailsModal';
 import { DataContext } from '../../ContextAPI/data';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SingleDetail from './SingleDetail';
 
 const Details = () => {
   const { apiData } = useContext(DataContext);
@@ -18,6 +19,7 @@ const Details = () => {
   const { fetchDetails } = fetchDetailsFunction;
   const [editModal, setEditModal] = useState(false);
   const [selectedDetail, setselectedDetail] = useState(null);
+  const [reportModal, setreportModal] = useState(false);
 
   const deleteDetail = async (deleteDetailId) => {
     await axios
@@ -117,13 +119,13 @@ const Details = () => {
                       समानको नाम (स्पेसिफिकेसन) (परिमाण)
                     </th>
 
-                    <th scope='col' class='px-6 py-3'>
+                    <th scope='col' class='w-[15%] px-6 py-3'>
                       बुझेको मिति
                     </th>
-                    <th scope='col' class='px-6 py-3'>
+                    <th scope='col' class='w-[15%] px-6 py-3'>
                       बुझी लिनेको नाम
                     </th>
-                    <th scope='col' class='px-6 py-3'>
+                    <th scope='col' class='w-[15%] px-6 py-3'>
                       आर्थिक वर्ष
                     </th>
 
@@ -164,7 +166,7 @@ const Details = () => {
                           {detail.attributes.fiscalyear}{' '}
                         </td>
 
-                        <td class='flex px-4 py-4'>
+                        <td class='flex px-6 py-4'>
                           <a
                             onClick={() => {
                               setEditModal(true);
@@ -187,19 +189,9 @@ const Details = () => {
                             </svg>
                           </a>
 
-                          {editModal ? (
-                            <EditDetailsModal
-                              editModal={editModal}
-                              setEditModal={setEditModal}
-                              departmentId={detail.id}
-                              detailId={detail.id}
-                              attributes={selectedDetail.attributes}
-                              // updateDepartments={updateDepartments}
-                            />
-                          ) : null}
                           <a
                             onClick={() => deleteDetail(detail.id)}
-                            class='font-medium text-red-600 dark:text-blue-500 hover:underline'
+                            class='mr-2 font-medium text-red-600 dark:text-blue-500 hover:underline'
                           >
                             <svg
                               xmlns='http://www.w3.org/2000/svg'
@@ -214,6 +206,48 @@ const Details = () => {
                               />
                             </svg>
                           </a>
+                          <a
+                            onClick={() => {
+                              setreportModal(true);
+                              editRow(detail);
+                            }}
+                            class='font-medium text-gray-600 dark:text-blue-500 hover:underline'
+                          >
+                            <svg
+                              xmlns='http://www.w3.org/2000/svg'
+                              className='h-5 w-5'
+                              viewBox='0 0 20 20'
+                              fill='currentColor'
+                            >
+                              <path d='M10 12a2 2 0 100-4 2 2 0 000 4z' />
+                              <path
+                                fillRule='evenodd'
+                                d='M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z'
+                                clipRule='evenodd'
+                              />
+                            </svg>
+                          </a>
+                          {editModal ? (
+                            <EditDetailsModal
+                              editModal={editModal}
+                              setEditModal={setEditModal}
+                              departmentId={detail.id}
+                              detailId={detail.id}
+                              attributes={selectedDetail.attributes}
+                              // updateDepartments={updateDepartments}
+                            />
+                          ) : null}
+                          {reportModal ? (
+                            <SingleDetail
+                              reportModal={reportModal}
+                              setreportModal={setreportModal}
+                              departmentId={detail.id}
+                              // detailId={detail.id}
+                              selectedDetail={selectedDetail}
+                              attributes={selectedDetail.attributes}
+                              // updateDepartments={updateDepartments}
+                            />
+                          ) : null}
                           <ToastContainer />
                         </td>
                       </tr>
