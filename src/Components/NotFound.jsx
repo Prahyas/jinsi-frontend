@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const NotFound = ({ errorTitle, errorMsg }) => {
   return (
-    <div className='h-screen w-screen flex justify-center items-center bg-red-300 fixed left-0 top-0 '>
+    <div className='z-20 h-screen w-screen flex justify-center items-center bg-red-300 fixed left-0 top-0 '>
       <div
         id='alert-additional-content-2'
         className='w-1/2 p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200'
