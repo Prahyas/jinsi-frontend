@@ -24,6 +24,8 @@ const Dashboard = ({ id, details }) => {
   const [data, setdata] = useState(initialFormState);
   const { departmentsData } = useContext(DataContext);
   const [departments, setDepartments] = departmentsData;
+  const { currentUserData } = useContext(DataContext);
+  const [currentUser, setcurrentUser] = currentUserData;
 
   const handleInputChange = (index, event) => {
     const values = [...inputFields];
@@ -57,9 +59,17 @@ const Dashboard = ({ id, details }) => {
   const onSubmit = async () => {
     console.log('data', data);
     await axios
-      .post(`${api}/api/details?populate=*`, {
-        data: data,
-      })
+      .post(
+        `${api}/api/details?populate=*`,
+        {
+          data: data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${currentUser.jwt}`,
+          },
+        }
+      )
       .then((response) => {
         setdata(initialFormState);
         successNotification();
