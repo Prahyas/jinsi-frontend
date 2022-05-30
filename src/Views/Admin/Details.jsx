@@ -192,7 +192,7 @@ const Details = () => {
                           {detail.attributes.fiscalyear}{' '}
                         </td>
 
-                        <td class='flex px-6 py-4'>
+                        <td class='no-print flex px-6 py-4'>
                           <a
                             onClick={() => {
                               setEditModal(true);
