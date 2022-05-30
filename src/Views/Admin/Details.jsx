@@ -176,9 +176,9 @@ const Details = () => {
                         <td class='px-6 py-4 space-y-1'>
                           {detail.attributes.goods.map((good) => {
                             return (
-                              <span class='inline-block bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900'>
-                                {good.goodname} {``} ({good.specification}) {``}{' '}
-                                ({good.quantity})
+                              <span class='flex bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900'>
+                                {``} {good.goodname} {``} ({good.specification}){' '}
+                                {``}({good.quantity})
                               </span>
                             );
                           })}
