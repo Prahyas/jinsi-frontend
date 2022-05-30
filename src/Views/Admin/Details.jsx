@@ -155,7 +155,7 @@ const Details = () => {
                       आर्थिक वर्ष
                     </th>
 
-                    <th scope='col' class='px-6 py-3'>
+                    <th scope='col' class='no-print px-6 py-3'>
                       <span class='sr-only'>Edit</span>
                     </th>
                   </tr>
