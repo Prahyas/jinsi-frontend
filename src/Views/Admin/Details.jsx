@@ -142,7 +142,7 @@ const Details = () => {
                       स.नं.
                     </th> */}
                     <th scope='col' class='px-6 py-3'>
-                      समानको नाम (स्पेसिफिकेसन) (परिमाण)
+                      समानको विवरण
                     </th>
 
                     <th scope='col' class='w-[15%] px-6 py-3'>
@@ -174,14 +174,42 @@ const Details = () => {
                           {detail.id}
                         </th> */}
                         <td class='px-6 py-4 space-y-1'>
-                          {detail.attributes.goods.map((good) => {
-                            return (
-                              <span class='flex bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900'>
-                                {``} {good.goodname} {``} ({good.specification}){' '}
-                                {``}({good.quantity})
-                              </span>
-                            );
-                          })}
+                          <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+                            <tr>
+                              {/* <th scope='col' class='px-6 py-3'>
+                      स.नं.
+                    </th> */}
+                              <th scope='col' class='px-6 py-3'>
+                                समानको नाम
+                              </th>
+
+                              <th scope='col' class='w-[15%] px-6 py-3'>
+                                स्पेसिफिकेसन
+                              </th>
+                              <th scope='col' class='w-[15%] px-6 py-3'>
+                                परिमाण
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {detail.attributes.goods.map((good) => {
+                              return (
+                                <>
+                                  <tr class='border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700'>
+                                    <td class='px-6 py-4'>{good.goodname}</td>
+                                    <td class='px-6 py-4'>
+                                      {good.specification}
+                                    </td>
+                                    <td class='px-6 py-4'>{good.quantity}</td>
+                                  </tr>
+                                </>
+                                // <span class='flex bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900'>
+                                //   {``} {good.goodname} {``} ({good.specification}){' '}
+                                //   {``}({good.quantity})
+                                // </span>
+                              );
+                            })}
+                          </tbody>
                         </td>
 
                         <td class='px-6 py-4'>{detail.attributes.date}</td>
