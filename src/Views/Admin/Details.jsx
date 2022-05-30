@@ -1,10 +1,12 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import EditDetailsModal from '../../Components/DetailsModals/EditDetailsModal';
 import { DataContext } from '../../ContextAPI/data';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SingleDetail from './SingleDetail';
+import ReactHtmlTableToExcel from 'react-html-table-to-excel';
+import ReactToPrint from 'react-to-print';
 
 const Details = () => {
   const { apiData } = useContext(DataContext);
@@ -20,6 +22,7 @@ const Details = () => {
   const [editModal, setEditModal] = useState(false);
   const [selectedDetail, setselectedDetail] = useState(null);
   const [reportModal, setreportModal] = useState(false);
+  const componentRef = useRef();
 
   const deleteDetail = async (deleteDetailId) => {
     await axios
@@ -107,9 +110,32 @@ const Details = () => {
             </div>
 
             <hr className='mb-5' />
-
-            <div class=' overflow-x-auto shadow-md sm:rounded-lg'>
-              <table class='table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400'>
+            <div className='flex justify-end mb-5 px-5'>
+              <ReactToPrint
+                trigger={() => (
+                  <button className='mr-3 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'>
+                    प्रिन्ट गर्नुहोस
+                  </button>
+                )}
+                content={() => componentRef.current}
+              />
+              <ReactHtmlTableToExcel
+                id='test-table-xls-button'
+                className='download-table-xls-button text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'
+                table='table-to-xls'
+                filename='tablexls'
+                sheet='tablexls'
+                buttonText='डाउन्लोड गर्नुहोस'
+              />
+            </div>
+            <div
+              ref={componentRef}
+              class=' overflow-x-auto shadow-md sm:rounded-lg'
+            >
+              <table
+                id='table-to-xls'
+                class='table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400'
+              >
                 <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                   <tr>
                     {/* <th scope='col' class='px-6 py-3'>
