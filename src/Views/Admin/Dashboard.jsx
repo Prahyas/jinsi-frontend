@@ -8,13 +8,6 @@ import 'nepali-datepicker-reactjs/dist/index.css';
 import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
 const Dashboard = ({ id, details }) => {
-  try {
-    const adDate = bsToAd('2079-02-17');
-    console.log('adDate', adDate);
-  } catch (e) {
-    console.log(e.message);
-  }
-
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
   const [inputFields, setInputFields] = useState([
@@ -66,7 +59,6 @@ const Dashboard = ({ id, details }) => {
   };
 
   const onSubmit = async () => {
-    console.log('data', data);
     await axios
       .post(`${api}/api/details?populate=*`, {
         data: data,
