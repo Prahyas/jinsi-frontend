@@ -17,7 +17,7 @@ const Dashboard = ({ id, details }) => {
     department: '',
     goods: [],
     date: '',
-    timestamp: '',
+    timecode: '',
     fiscalyear: '',
     customername: '',
     departmentid: '',
@@ -157,8 +157,13 @@ const Dashboard = ({ id, details }) => {
                 console.log(value);
                 const adDate = bsToAd(value);
                 console.log('adDatafrominput,', adDate);
-                const timeStamp = Date.parse(adDate);
-                setdata({ ...data, date: value, timestamp: timeStamp });
+                const newtimestamp = Date.parse(adDate);
+                console.log('newtimestamp', newtimestamp);
+                setdata({
+                  ...data,
+                  date: value,
+                  timecode: parseInt(newtimestamp),
+                });
               }}
               options={{ calenderLocale: 'ne', valueLocale: 'en' }}
             />
