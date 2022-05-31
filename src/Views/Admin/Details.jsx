@@ -7,6 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import SingleDetail from './SingleDetail';
 import ReactHtmlTableToExcel from 'react-html-table-to-excel';
 import ReactToPrint from 'react-to-print';
+import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
+import 'nepali-datepicker-reactjs/dist/index.css';
+import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
 const Details = () => {
   const { apiData } = useContext(DataContext);
@@ -19,6 +22,15 @@ const Details = () => {
   const [editModal, setEditModal] = useState(false);
   const [selectedDetail, setselectedDetail] = useState(null);
   const [reportModal, setreportModal] = useState(false);
+  const [searchDate1, setserchDate1] = useState({
+    date1: '',
+    timestamp1: '',
+  });
+  const [searchDate2, setserchDate2] = useState({
+    date2: '',
+    timestamp2: '',
+  });
+
   const componentRef = useRef();
 
   const deleteDetail = async (deleteDetailId) => {
@@ -66,10 +78,25 @@ const Details = () => {
   }, [departments]);
   useEffect(() => {
     console.log('filteredDepartments', filteredDepartments);
-  }, [departments]);
+  }, [filteredDepartments]);
   useEffect(() => {
     console.log('selected', selectedDetail);
   }, [selectedDetail]);
+  useEffect(() => {
+    console.log('date1', searchDate1);
+    console.log('date2', searchDate2);
+  }, [searchDate1, searchDate2]);
+
+  // useEffect(() => {
+  //   filteredDepartments.filter(
+  //     user => (user.timeStamp * 1000) >= min && (user.timeStamp * 1000) <= max
+  //   ).map(
+  //     user => {
+  //       const date = new Date(user.timeStamp * 1000);
+  //       const dd = date.toDateString();
+  //     }
+  //   )
+  // }, [searchDate1, searchDate2]);
 
   return (
     <>
@@ -81,6 +108,41 @@ const Details = () => {
                 {department.attributes.name}
               </p>
               <div class='hidden h-10 lg:flex'>
+                <div>
+                  <NepaliDatePicker
+                    className=' mr-5'
+                    value={searchDate1.date1}
+                    onChange={(value) => {
+                      console.log(value);
+                      const adDate = bsToAd(value);
+                      const timeStamp = Date.parse(adDate);
+                      setserchDate1({
+                        ...searchDate1,
+                        date1: value,
+                        timestamp1: timeStamp,
+                      });
+                    }}
+                    options={{ calenderLocale: 'ne', valueLocale: 'en' }}
+                  />
+                </div>
+                <div>
+                  <NepaliDatePicker
+                    inputClassName='form-control'
+                    className='mr-5'
+                    value={searchDate2.date2}
+                    onChange={(value) => {
+                      console.log(value);
+                      const adDate = bsToAd(value);
+                      const timeStamp = Date.parse(adDate);
+                      setserchDate2({
+                        ...searchDate2,
+                        date2: value,
+                        timestamp2: timeStamp,
+                      });
+                    }}
+                    options={{ calenderLocale: 'ne', valueLocale: 'en' }}
+                  />
+                </div>
                 <span class='inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'

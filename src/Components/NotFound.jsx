@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Dashboard from '../Views/Admin/Dashboard';
 
 const NotFound = ({ errorTitle, errorMsg }) => {
   return (
