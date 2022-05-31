@@ -68,17 +68,9 @@ const Dashboard = ({ id, details }) => {
   const onSubmit = async () => {
     console.log('data', data);
     await axios
-      .post(
-        `${api}/api/details?populate=*`,
-        {
-          data: data,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${currentUser.jwt}`,
-          },
-        }
-      )
+      .post(`${api}/api/details?populate=*`, {
+        data: data,
+      })
       .then((response) => {
         setdata(initialFormState);
         successNotification();
