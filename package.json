@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sbmdkl/nepali-date-converter": "^1.3.3",
     "@sbmdkl/nepali-datepicker-reactjs": "^1.2.1",
     "axios": "^0.26.1",
     "flowbite": "^1.3.4",

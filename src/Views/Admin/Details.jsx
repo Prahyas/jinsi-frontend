@@ -16,9 +16,6 @@ const Details = () => {
   const { filteredDepartmentsData } = useContext(DataContext);
   const [filteredDepartments, setFilteredDepartments] = filteredDepartmentsData;
   const { fetchDepartmentsFunction } = useContext(DataContext);
-  const { fetchDepartments } = fetchDepartmentsFunction;
-  const { fetchDetailsFunction } = useContext(DataContext);
-  const { fetchDetails } = fetchDetailsFunction;
   const [editModal, setEditModal] = useState(false);
   const [selectedDetail, setselectedDetail] = useState(null);
   const [reportModal, setreportModal] = useState(false);
@@ -184,7 +181,7 @@ const Details = () => {
                           })}
                         </td>
 
-                        <td class='px-6 py-4'>{detail.attributes.date}</td>
+                        <td class='px-6 py-4'> {detail.attributes.date}</td>
                         <td class='px-6 py-4'>
                           {detail.attributes.customername}{' '}
                         </td>

@@ -5,8 +5,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
+import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
 const Dashboard = ({ id, details }) => {
+  try {
+    const adDate = bsToAd('2079-02-17');
+    console.log('adDate', adDate);
+  } catch (e) {
+    console.log(e.message);
+  }
+
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
   const [inputFields, setInputFields] = useState([
@@ -16,6 +24,7 @@ const Dashboard = ({ id, details }) => {
     department: '',
     goods: [],
     date: '',
+    timestamp: '',
     fiscalyear: '',
     customername: '',
     departmentid: '',
@@ -160,7 +169,13 @@ const Dashboard = ({ id, details }) => {
               inputClassName='form-control'
               className=' mb-6'
               value={data.date}
-              onChange={(value) => setdata({ ...data, date: value })}
+              onChange={(value) => {
+                console.log(value);
+                const adDate = bsToAd(value);
+                console.log('adDatafrominput,', adDate);
+                const timeStamp = Date.parse(adDate);
+                setdata({ ...data, date: value, timestamp: timeStamp });
+              }}
               options={{ calenderLocale: 'ne', valueLocale: 'en' }}
             />
             {/* <Calendar
