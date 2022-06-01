@@ -81,19 +81,6 @@ const EditDepartmentModal = ({
                     <option>गाउँपालिका</option>
                     <option>वडा कार्यालय</option>
                   </select>
-                  {/* <input
-                    type='text'
-                    value={editDepartmentData.type}
-                    onChange={(e) =>
-                      seteditDepartmentData({
-                        ...editDepartmentData,
-                        description: e.target.value,
-                      })
-                    }
-                    class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                    placeholder='Description'
-                    required
-                  /> */}
                 </div>
                 <div class='mb-2'>
                   <label
@@ -126,7 +113,12 @@ const EditDepartmentModal = ({
                   setEditModal(false),
                     updateDepartments(id, editDepartmentData);
                 }}
-                class='text-white bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                className='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                disabled={
+                  !editDepartmentData.name ||
+                  !editDepartmentData.type ||
+                  !editDepartmentData.description
+                }
               >
                 पेश गर्नुहोस्
               </button>

@@ -43,7 +43,7 @@ const Details = () => {
         deleteNotification();
         setInterval(() => {
           window.location.reload();
-        }, 1500);
+        }, 1100);
       })
       .catch((error) => {
         errorNotification();
@@ -53,10 +53,11 @@ const Details = () => {
   const editRow = (detail) => {
     setselectedDetail(detail);
   };
+
   const deleteNotification = () =>
-    toast.success('Deleted successfully', {
+    toast.success('कार्य सफल', {
       position: 'top-right',
-      autoClose: 1500,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -65,9 +66,9 @@ const Details = () => {
     });
 
   const errorNotification = () => {
-    toast.error('Error, something went wrong', {
+    toast.error('कार्य असफल', {
       position: 'top-right',
-      autoClose: 1500,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -75,20 +76,6 @@ const Details = () => {
       progress: undefined,
     });
   };
-
-  useEffect(() => {
-    console.log('departments', departments);
-  }, [departments]);
-  useEffect(() => {
-    console.log('filteredDepartments', filteredDepartments);
-  }, [filteredDepartments]);
-  useEffect(() => {
-    console.log('selected', selectedDetail);
-  }, [selectedDetail]);
-  useEffect(() => {
-    console.log('date1', searchDate1);
-    console.log('date2', searchDate2);
-  }, [searchDate1, searchDate2]);
 
   return (
     <>
@@ -136,10 +123,22 @@ const Details = () => {
                         </button>
                       </div>
 
-                      <div class='p-6 '>
-                        <div class='mb-5 text-md dark:text-white'>
-                          मिति छान्नुहोस्{' '}
+                      <div class='p-6'>
+                        <div className=' mb-8 flex text-center justify-between items-center'>
+                          <div class=' text-md dark:text-white'>
+                            मिति छान्नुहोस्{' '}
+                          </div>
+                          <button
+                            onClick={() => {
+                              setserchDate1(initialDate1);
+                              setserchDate2(initialDate2);
+                            }}
+                            className=' text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-small rounded-lg text-sm sm:w-auto px-3 py-1.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'
+                          >
+                            रिसेट् गर्नुहोस्
+                          </button>
                         </div>
+
                         <div class='h-full md:flex md:justify-center md:items-center  '>
                           <div>
                             <NepaliDatePicker
@@ -185,27 +184,6 @@ const Details = () => {
                               }}
                             />
                           </div>
-
-                          <button
-                            onClick={() => {
-                              setserchDate1(initialDate1);
-                              setserchDate2(initialDate2);
-                            }}
-                            className=' text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'
-                          >
-                            <svg
-                              xmlns='http://www.w3.org/2000/svg'
-                              className='h-5 w-5'
-                              viewBox='0 0 20 20'
-                              fill='currentColor'
-                            >
-                              <path
-                                fillRule='evenodd'
-                                d='M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z'
-                                clipRule='evenodd'
-                              />
-                            </svg>
-                          </button>
                         </div>
                       </div>
                     </div>

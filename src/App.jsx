@@ -18,7 +18,7 @@ const App = () => {
               path='*'
               element={
                 <NotFound
-                  errorTitle={`माफ गर्नुहोला `}
+                  errorTitle={`माफ गर्नुहोला`}
                   errorMsg={`यो पेजमा केहि पनि छैन`}
                 />
               }

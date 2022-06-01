@@ -7,7 +7,7 @@ import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
 import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
-const Dashboard = ({ id, details }) => {
+const Dashboard = () => {
   const { apiData } = useContext(DataContext);
   const [api, setapi] = apiData;
   const [inputFields, setInputFields] = useState([
@@ -51,34 +51,16 @@ const Dashboard = ({ id, details }) => {
   };
 
   const handleRemoveFields = (index) => {
-    console.log('index', index);
     const values = [...inputFields];
     values.splice(index, 1);
     setInputFields(values);
     setdata({ ...data, goods: values });
   };
 
-  const onSubmit = async () => {
-    await axios
-      .post(`${api}/api/details?populate=*`, {
-        data: data,
-      })
-      .then((response) => {
-        setdata(initialFormState);
-        successNotification();
-        setInterval(() => {
-          window.location.reload();
-        }, 1500);
-      })
-      .catch((error) => {
-        errorNotification();
-      });
-  };
-
   const successNotification = () =>
-    toast.success('Data successfully submitted', {
+    toast.success('कार्य सफल', {
       position: 'top-right',
-      autoClose: 1500,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -87,9 +69,9 @@ const Dashboard = ({ id, details }) => {
     });
 
   const errorNotification = () => {
-    toast.error('Error, data not submitted', {
+    toast.error('कार्य असफल', {
       position: 'top-right',
-      autoClose: 1500,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -98,9 +80,20 @@ const Dashboard = ({ id, details }) => {
     });
   };
 
-  useEffect(() => {
-    console.log('Data', data);
-  }, [data]);
+  const onSubmit = async () => {
+    try {
+      await axios.post(`${api}/api/details?populate=*`, {
+        data: data,
+      });
+      setdata(initialFormState);
+      successNotification();
+      setInterval(() => {
+        window.location.reload();
+      }, 1100);
+    } catch (error) {
+      errorNotification();
+    }
+  };
 
   return (
     <>
@@ -143,10 +136,7 @@ const Dashboard = ({ id, details }) => {
 
         <div className='flex flex-wrap mb-6 md:flex-row flex-col'>
           <div className='w-full md:w-[30%]  md:mr-5'>
-            <label
-              htmlFor='email'
-              className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-            >
+            <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
               बुझेको मिति
             </label>
             <NepaliDatePicker
@@ -156,9 +146,9 @@ const Dashboard = ({ id, details }) => {
               onChange={(value) => {
                 console.log(value);
                 const adDate = bsToAd(value);
-                console.log('adDatafrominput,', adDate);
+
                 const newtimestamp = Date.parse(adDate);
-                console.log('newtimestamp', newtimestamp);
+
                 setdata({
                   ...data,
                   date: value,
@@ -167,24 +157,6 @@ const Dashboard = ({ id, details }) => {
               }}
               options={{ calenderLocale: 'ne', valueLocale: 'en' }}
             />
-            {/* <Calendar
-              onChange={(value) => setdata({ ...data, date: value.bsDate })}
-              className='rounded'
-              type='date'
-            /> */}
-            {/* <input
-              type='text'
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-              placeholder='yyyy/mm/dd'
-              value={data.date}
-              onChange={(e) =>
-                setdata({
-                  ...data,
-                  date: e.target.value,
-                })
-              }
-              required
-            /> */}
           </div>
           <div className='w-full md:w-[30%] mb-6 md:mr-6 '>
             <label
@@ -208,10 +180,7 @@ const Dashboard = ({ id, details }) => {
             />
           </div>
           <div className='w-full md:w-[30%]'>
-            <label
-              htmlFor='email'
-              className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-            >
+            <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
               आर्थिक वर्ष
             </label>
             <input
@@ -317,7 +286,15 @@ const Dashboard = ({ id, details }) => {
           type='button'
           onClick={onSubmit}
           className='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-          disabled={!data.department || data.date === ''}
+          disabled={
+            !data.department ||
+            data.date === '' ||
+            !data.fiscalyear ||
+            !data.customername ||
+            !inputFields[0].goodname ||
+            !inputFields[0].specification ||
+            !inputFields[0].quantity
+          }
         >
           पेश गर्नुहोस्
         </button>

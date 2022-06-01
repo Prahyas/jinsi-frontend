@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 const AddDepartmentModal = ({ addModal, setAddModal, addDepartments }) => {
   const initialFormState = {
-    name: null,
-    type: null,
-    description: null,
+    name: '',
+    type: '',
+    description: '',
   };
   const [newDepartmentData, setnewDepartmentData] = useState(initialFormState);
 
@@ -72,7 +72,7 @@ const AddDepartmentModal = ({ addModal, setAddModal, addDepartments }) => {
                     }
                     // onChange={handleInputChange}
                     class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                    placeholder='Department Name'
+                    placeholder='शाखाको नाम'
                     required
                   />
                 </div>
@@ -131,7 +131,7 @@ const AddDepartmentModal = ({ addModal, setAddModal, addDepartments }) => {
                       })
                     }
                     class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                    placeholder='Description'
+                    placeholder='विवरण'
                     required
                   />
                 </div>
@@ -142,7 +142,12 @@ const AddDepartmentModal = ({ addModal, setAddModal, addDepartments }) => {
               <button
                 type='button'
                 onClick={handleSubmit}
-                class='text-white bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                disabled={
+                  !newDepartmentData.name ||
+                  !newDepartmentData.type ||
+                  !newDepartmentData.description
+                }
+                className='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               >
                 पेश गर्नुहोस्
               </button>

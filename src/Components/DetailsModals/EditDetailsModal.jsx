@@ -34,6 +34,7 @@ const EditDetailsModal = ({
   const { fetchDetails } = fetchDetailsFunction;
   const { fetchDepartmentsFunction } = useContext(DataContext);
   const { fetchDepartments } = fetchDepartmentsFunction;
+
   const handleInputChange = (index, event) => {
     const values = [...inputFields];
     if (event.target.name === 'goodname') {
@@ -56,36 +57,34 @@ const EditDetailsModal = ({
   };
 
   const handleRemoveFields = (index) => {
-    console.log('index', index);
     const values = [...inputFields];
-    values.splice(index, 1);
+    if (values.length > 1) {
+      values.splice(index, 1);
+    }
     setInputFields(values);
     setdata({ ...data, goods: values });
   };
 
   const onSubmit = async (editDetailsId) => {
-    console.log('data', data);
-    await axios
-      .put(`${api}/api/details/${editDetailsId}`, {
+    try {
+      await axios.put(`${api}/api/details/${editDetailsId}`, {
         data: data,
-      })
-      .then((response) => {
-        setdata(initialFormState);
-        successNotification();
-        setInterval(() => {
-          setEditModal(false);
-          window.location.reload();
-        }, 1500);
-      })
-      .catch((error) => {
-        errorNotification();
       });
+      setdata(initialFormState);
+      successNotification();
+      setInterval(() => {
+        setEditModal(false);
+        window.location.reload();
+      }, 1100);
+    } catch (error) {
+      errorNotification();
+    }
   };
 
   const successNotification = () =>
-    toast.success('Data successfully submitted', {
+    toast.success('कार्य सफल', {
       position: 'top-right',
-      autoClose: 1500,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -94,9 +93,9 @@ const EditDetailsModal = ({
     });
 
   const errorNotification = () => {
-    toast.error('Error, data not submitted', {
+    toast.error('कार्य असफल', {
       position: 'top-right',
-      autoClose: 1500,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -104,13 +103,6 @@ const EditDetailsModal = ({
       progress: undefined,
     });
   };
-
-  useEffect(() => {
-    console.log('attributes', attributes);
-  }, [attributes]);
-  useEffect(() => {
-    console.log('data2', data);
-  }, [data]);
 
   return (
     <div class=' bg-rgba overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 bottom-0 z-50 flex justify-center items-center h-full '>
@@ -187,9 +179,9 @@ const EditDetailsModal = ({
                     onChange={(value) => {
                       console.log(value);
                       const adDate = bsToAd(value);
-                      console.log('adDatafrominput,', adDate);
+
                       const newtimestamp = Date.parse(adDate);
-                      console.log('newtimestamp', newtimestamp);
+
                       setdata({
                         ...data,
                         date: value,
@@ -198,25 +190,6 @@ const EditDetailsModal = ({
                     }}
                     options={{ calenderLocale: 'ne', valueLocale: 'en' }}
                   />
-
-                  {/* <Calendar
-              onChange={(value) => setdata({ ...data, date: value.bsDate })}
-              className='rounded'
-              type='date'
-            /> */}
-                  {/* <input
-              type='text'
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-              placeholder='yyyy/mm/dd'
-              value={data.date}
-              onChange={(e) =>
-                setdata({
-                  ...data,
-                  date: e.target.value,
-                })
-              }
-              required
-            /> */}
                 </div>
                 <div className='w-full md:w-[30%] mb-6 md:mr-6 '>
                   <label
@@ -345,17 +318,33 @@ const EditDetailsModal = ({
                   );
                 })}
               </div>
-
-              <button
-                type='button'
-                onClick={() => {
-                  onSubmit(detailId);
-                }}
-                class='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-                disabled={!data.department || data.date === ''}
-              >
-                पेश गर्नुहोस्
-              </button>
+              <div class='flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600'>
+                <button
+                  type='button'
+                  onClick={() => {
+                    onSubmit(detailId);
+                  }}
+                  class='text-white disabled:opacity-75 disabled:cursor-not-allowed bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                  disabled={
+                    !data.department ||
+                    data.date === '' ||
+                    !data.fiscalyear ||
+                    !data.customername ||
+                    !inputFields[0].goodname ||
+                    !inputFields[0].specification ||
+                    !inputFields[0].quantity
+                  }
+                >
+                  पेश गर्नुहोस्
+                </button>
+                <button
+                  onClick={() => setEditModal(false)}
+                  type='button'
+                  class='text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600'
+                >
+                  रद्द
+                </button>
+              </div>
               <ToastContainer />
             </form>
           </div>
