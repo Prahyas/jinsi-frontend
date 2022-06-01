@@ -20,6 +20,7 @@ const EditDetailsModal = ({
     department: attributes.departmentid,
     goods: attributes.goods,
     date: attributes.date,
+    timecode: attributes.timecode,
     fiscalyear: attributes.fiscalyear,
     customername: attributes.customername,
     departmentid: attributes.departmentid,
@@ -182,7 +183,18 @@ const EditDetailsModal = ({
                     inputClassName='form-control'
                     className='mb-6'
                     value={data.date}
-                    onChange={(value) => setdata({ ...data, date: value })}
+                    onChange={(value) => {
+                      console.log(value);
+                      const adDate = bsToAd(value);
+                      console.log('adDatafrominput,', adDate);
+                      const newtimestamp = Date.parse(adDate);
+                      console.log('newtimestamp', newtimestamp);
+                      setdata({
+                        ...data,
+                        date: value,
+                        timecode: parseInt(newtimestamp),
+                      });
+                    }}
                     options={{ calenderLocale: 'ne', valueLocale: 'en' }}
                   />
 

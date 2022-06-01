@@ -258,10 +258,9 @@ const Details = () => {
                       {department.attributes.details.data
                         .filter(
                           (detail) =>
-                            detail.attributes.timestamp >=
+                            detail.attributes.timecode >=
                               searchDate1.timestamp1 &&
-                            detail.attributes.timestamp <=
-                              searchDate2.timestamp2
+                            detail.attributes.timecode <= searchDate2.timestamp2
                           // detail.attributes.timestamp ===
                           // searchDate1.timestamp1
                         )
