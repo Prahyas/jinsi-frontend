@@ -28,8 +28,8 @@ const Admin = () => {
                   path='*'
                   element={
                     <NotFound
-                      errorTitle={`Sorry`}
-                      errorMsg={`You are not authorized to access this page.`}
+                      errorTitle={`माफ गर्नुहोला `}
+                      errorMsg={`तपाई अधिकृत हुनुहुन्न`}
                     />
                   }
                 />

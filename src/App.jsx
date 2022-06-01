@@ -18,8 +18,8 @@ const App = () => {
               path='*'
               element={
                 <NotFound
-                  errorTitle={`Sorry`}
-                  errorMsg={`Nothing to show here. Login first`}
+                  errorTitle={`माफ गर्नुहोला `}
+                  errorMsg={`यो पेजमा केहि पनि छैन`}
                 />
               }
             />
