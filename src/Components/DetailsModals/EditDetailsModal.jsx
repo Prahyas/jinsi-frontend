@@ -192,7 +192,7 @@ const EditDetailsModal = ({
                       setdata({
                         ...data,
                         date: value,
-                        timecode: parseInt(newtimestamp),
+                        timecode: newtimestamp,
                       });
                     }}
                     options={{ calenderLocale: 'ne', valueLocale: 'en' }}
