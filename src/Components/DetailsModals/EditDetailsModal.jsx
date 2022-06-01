@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NepaliDatePicker } from 'nepali-datepicker-reactjs';
 import 'nepali-datepicker-reactjs/dist/index.css';
+import { adToBs, bsToAd } from '@sbmdkl/nepali-date-converter';
 
 const EditDetailsModal = ({
   editModal,
@@ -20,7 +21,7 @@ const EditDetailsModal = ({
     department: attributes.departmentid,
     goods: attributes.goods,
     date: attributes.date,
-    timecode: attributes.timecode,
+    timecode: parseInt(attributes.timecode),
     fiscalyear: attributes.fiscalyear,
     customername: attributes.customername,
     departmentid: attributes.departmentid,
@@ -314,7 +315,7 @@ const EditDetailsModal = ({
                         onChange={(event) => handleInputChange(index, event)}
                       />
                       <input
-                        type='number'
+                        type='text'
                         class='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                         required
                         name='quantity'
