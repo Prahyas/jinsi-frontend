@@ -32,6 +32,7 @@ const Details = () => {
   };
   const [searchDate1, setserchDate1] = useState(initialDate1);
   const [searchDate2, setserchDate2] = useState(initialDate2);
+  const [filterModal, setfilterModal] = useState(false);
 
   const componentRef = useRef();
 
@@ -89,25 +90,6 @@ const Details = () => {
     console.log('date2', searchDate2);
   }, [searchDate1, searchDate2]);
 
-  // useEffect(() => {
-  //   if (searchDate1 || searchDate2) {
-  //     const daterangeSearch = () => {
-  //       filteredDepartments.attributes.details.data
-  //         .filter(
-  //           (data) =>
-  //             data.timestamp * 1000 >= searchDate1.timestamp1 &&
-  //             data.timestamp * 1000 <= searchDate2.timestamp2
-  //         )
-  //         .map((data) => {
-  //           const date = new Date(data.timestamp * 1000);
-  //           const dd = date.toDateString();
-  //           console.log('dd', dd);
-  //         });
-  //     };
-  //     daterangeSearch();
-  //   }
-  // }, [searchDate1, searchDate2]);
-
   return (
     <>
       {filteredDepartments.map((department) => {
@@ -117,85 +99,119 @@ const Details = () => {
               <p class='text-2xl dark:text-white'>
                 {department.attributes.name}
               </p>
-              <div class='hidden h-10 lg:flex'>
-                <div>
-                  <NepaliDatePicker
-                    className=' mr-5'
-                    value={searchDate1.date1}
-                    onChange={(value) => {
-                      console.log(value);
-                      const adDate = bsToAd(value);
-                      const timeStamp = Date.parse(adDate);
-                      setserchDate1({
-                        ...searchDate1,
-                        date1: value,
-                        timestamp1: timeStamp,
-                      });
-                    }}
-                    options={{ calenderLocale: 'ne', valueLocale: 'en' }}
-                  />
+
+              <button
+                onClick={() => {
+                  setfilterModal(true);
+                }}
+                className='mr-3 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'
+              >
+                फिल्टर
+              </button>
+              {filterModal ? (
+                <div class=' bg-rgba overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 bottom-0 z-50 flex justify-center items-center h-full '>
+                  <div class='relative px-4 w-full max-w-2xl h-full pt-10'>
+                    <div class='relative bg-white rounded-lg shadow dark:bg-gray-700'>
+                      <div class='flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600'>
+                        <h3 class='text-xl font-semibold text-gray-900 lg:text-2xl dark:text-white'>
+                          फिल्टर
+                        </h3>
+                        <button
+                          type='button'
+                          class='text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white'
+                          onClick={() => setfilterModal(false)}
+                        >
+                          <svg
+                            class='w-5 h-5'
+                            fill='currentColor'
+                            viewBox='0 0 20 20'
+                            xmlns='http://www.w3.org/2000/svg'
+                          >
+                            <path
+                              fill-rule='evenodd'
+                              d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                              clip-rule='evenodd'
+                            ></path>
+                          </svg>
+                        </button>
+                      </div>
+
+                      <div class='p-6 '>
+                        <div class='mb-5 text-md dark:text-white'>
+                          मिति छान्नुहोस्{' '}
+                        </div>
+                        <div class='h-full md:flex md:justify-center md:items-center  '>
+                          <div>
+                            <NepaliDatePicker
+                              className='md:mr-5 md:mb-0 mb-5'
+                              value={searchDate1.date1}
+                              onChange={(value) => {
+                                console.log(value);
+                                const adDate = bsToAd(value);
+                                const timeStamp = Date.parse(adDate);
+                                setserchDate1({
+                                  ...searchDate1,
+                                  date1: value,
+                                  timestamp1: timeStamp,
+                                });
+                              }}
+                              options={{
+                                calenderLocale: 'ne',
+                                valueLocale: 'en',
+                              }}
+                            />
+                          </div>
+                          <div class='md:mr-5 md:mb-0 mb-5  text-sm dark:text-white'>
+                            -
+                          </div>
+                          <div>
+                            <NepaliDatePicker
+                              inputClassName='form-control'
+                              className='md:mr-5 md:mb-0 mb-5'
+                              value={searchDate2.date2}
+                              onChange={(value) => {
+                                console.log(value);
+                                const adDate = bsToAd(value);
+                                const timeStamp = Date.parse(adDate);
+                                setserchDate2({
+                                  ...searchDate2,
+                                  date2: value,
+                                  timestamp2: timeStamp,
+                                });
+                              }}
+                              options={{
+                                calenderLocale: 'ne',
+                                valueLocale: 'en',
+                              }}
+                            />
+                          </div>
+
+                          <button
+                            onClick={() => {
+                              setserchDate1(initialDate1);
+                              setserchDate2(initialDate2);
+                            }}
+                            className=' text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'
+                          >
+                            <svg
+                              xmlns='http://www.w3.org/2000/svg'
+                              className='h-5 w-5'
+                              viewBox='0 0 20 20'
+                              fill='currentColor'
+                            >
+                              <path
+                                fillRule='evenodd'
+                                d='M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z'
+                                clipRule='evenodd'
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <NepaliDatePicker
-                    inputClassName='form-control'
-                    className='mr-5'
-                    value={searchDate2.date2}
-                    onChange={(value) => {
-                      console.log(value);
-                      const adDate = bsToAd(value);
-                      const timeStamp = Date.parse(adDate);
-                      setserchDate2({
-                        ...searchDate2,
-                        date2: value,
-                        timestamp2: timeStamp,
-                      });
-                    }}
-                    options={{ calenderLocale: 'ne', valueLocale: 'en' }}
-                  />
-                </div>
-                <button
-                  onClick={() => {
-                    setserchDate1(initialDate1);
-                    setserchDate2(initialDate2);
-                  }}
-                  className='mr-3 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-dred-600 dark:hover:bg-dred-700 dark:focus:ring-dred-800'
-                >
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-5 w-5'
-                    viewBox='0 0 20 20'
-                    fill='currentColor'
-                  >
-                    <path
-                      fillRule='evenodd'
-                      d='M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z'
-                      clipRule='evenodd'
-                    />
-                  </svg>
-                </button>
-                {/* <span class='inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    class='h-3 w-3'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                    stroke-width='2'
-                  >
-                    <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-                    />
-                  </svg>
-                </span>
-                <input
-                  type='text'
-                  id='website-admin'
-                  class='rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-red-500 focus:border-red-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
-                  placeholder='Search'
-                /> */}
-              </div>
+              ) : null}
             </div>
 
             <hr className='mb-5' />
